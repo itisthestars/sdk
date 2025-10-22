@@ -7,7 +7,7 @@ onMounted(()=>{
 </script>
 
 <template>
-  <main>
+  <main>1111
     <TheWelcome />
   </main>
 </template>

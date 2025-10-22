@@ -15,14 +15,14 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v3
         with:
-          version: 8  # 指定具体版本，避免兼容性问题
+          version: 8 # 指定具体版本，避免兼容性问题
 
       # 2. 再设置 Node.js，并关联 pnpm 缓存
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20.x'
-          cache: 'pnpm'  # 此时缓存才会生效
+          cache: 'pnpm' # 此时缓存才会生效
 
       # 3. 安装依赖（现在 pnpm 已可用）
       - name: Install dependencies
