@@ -2,7 +2,7 @@
 import TheWelcome from '../components/TheWelcome.vue'
 import { ref, onMounted } from 'vue'
 onMounted(() => {
-  let num = 0
+  let num = null
   console.log(num.length)
 })
 </script>
