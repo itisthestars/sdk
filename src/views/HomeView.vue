@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import TheWelcome from '../components/TheWelcome.vue'
-import { ref ,onMounted} from 'vue'
-onMounted(()=>{
-  console.log(a,b)
+import { ref, onMounted } from 'vue'
+onMounted(() => {
+  let num = 0
+  console.log(num.length)
 })
 </script>
 
 <template>
-  <main>1111
+  <main>
+    1111
     <TheWelcome />
   </main>
 </template>
