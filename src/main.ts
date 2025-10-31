@@ -12,3 +12,7 @@ app.use(createPinia())
 app.use(router)
 
 app.mount('#app')
+app.config.errorHandler = function (err, vm) {
+    // handle error
+    console.error('Global Error Handler:', err, vm)
+}
