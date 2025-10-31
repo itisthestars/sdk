@@ -8,8 +8,8 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 export default defineConfig({
   build: {
     outDir: 'dist',
-    sourcemap: true,
-    emptyOutDir: true
+    // sourcemap: true,
+    // emptyOutDir: true
   },
   base: './',
   plugins: [
