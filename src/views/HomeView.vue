@@ -98,14 +98,15 @@ const sourceMapUpload = async (file: any) => {
 }
 const getSource = async (sourcemap: any, line: number, column: number) => {
     try {
-      console.log('sourcemap', sourcemap)
+        console.log('sourcemap', sourcemap,line,column)
         const consumer = await new sourceMap.SourceMapConsumer(JSON.parse(sourcemap))
-
+        console.log('consumer', consumer)
         // 通过报错位置查找到对应的源文件名称以及报错行数
         const originalPosition = consumer.originalPositionFor({
             line: line,
             column: column
         })
+        console.log('originalPosition', originalPosition)
         const source = consumer.sourceContentFor(originalPosition.source)
         console.log('source', source)
         return {
