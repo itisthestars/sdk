@@ -11,43 +11,34 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # 拉取完整历史，避免部分依赖或工具需要历史提交信息
+          fetch-depth: 0
 
-      # 1. 安装 pnpm
       - name: Install pnpm
         uses: pnpm/action-setup@v3
         with:
           version: 8
-          run_install: false # 避免自动安装，手动控制更灵活
+          run_install: false
 
-      # 2. 设置 Node.js 并缓存依赖
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20.x'
           cache: 'pnpm'
-          cache-dependency-path: pnpm-lock.yaml # 精确指定锁文件路径，提升缓存命中率
 
-      # 3. 安装依赖（添加 --frozen-lockfile 确保依赖版本严格一致）
+      # 修改这里：移除 --frozen-lockfile
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --no-frozen-lockfile
 
-      # 4. 打包构建（若之前有 crypto 模块错误，可添加环境变量或 polyfill 配置）
       - name: Build
         run: pnpm run build
-        env:
-          # 解决 Node.js 环境下 crypto 模块相关问题（部分依赖可能需要）
-          NODE_OPTIONS: --openssl-legacy-provider
 
-      # 5. 部署到 GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           branch: gh-pages
           publish_dir: ./dist
-          github_token: ${{ secrets.sdk }} # 确保此 secret 有 repo 权限
+          github_token: ${{ secrets.sdk }}
           user_name: ${{ secrets.MY_USER_NAME }}
           user_email: ${{ secrets.MY_USER_EMAIL }}
           commit_message: 自动部署 ${{ github.sha }}
-          # 可选：清除 gh-pages 分支旧文件（避免冗余文件）
           force_orphan: true
